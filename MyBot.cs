@@ -1,76 +1,75 @@
 using ChessChallenge.API;
 using System;
 
-public class MyBot : IChessBot{
+namespace ChessChallenge.Example {
+    public class MyBot : IChessBot {
+        int bignumber = Int32.MaxValue;
+        int[] pieceValues = { 0, 100, 300, 300, 500, 900, 10000 };
+        Move bestMove = Move.NullMove;
+        public Move Think(Board board, Timer timer){
+            int cl = -1;
 
-    int[] pieceValues = { 0, 100, 300, 300, 500, 900, 10000 };
-    // string status = "none";
+            if(board.IsWhiteToMove) cl = 1;
 
-    public Move Think(Board board, Timer timer){
+            Search(board, 5, cl, -bignumber, bignumber);
 
-        Move[] legalMoves = board.GetLegalMoves();
-        System.Random rng = new();
-        Move selectedMove = legalMoves[rng.Next(legalMoves.Length)];
-
-        int highestValueCapture = 0;
-
-        foreach (Move move in legalMoves){
-            /*
-                the problem with this is that if the move that draws the game
-                comes first in the array while it also having a checkmate move,
-                it will draw the game without checking for other stuf more valuable.
-
-                It is the next task to do.
-            */
-            if (MoveIsDraw(board, move)) {
-                selectedMove = move;
-                break;
-            } else if (MoveIsDraw(board, move)) {
-                selectedMove = move;
-                break;
-            } else if (move.IsPromotion) {
-                if ((int)move.PromotionPieceType == 5) {
-                    Console.WriteLine("prom5");
-                    selectedMove = move;
-                    break;
-                };
-            } else if (move.IsCastles && board.PlyCount / 2 < 8) {
-                Console.WriteLine("castles at {0}", board.PlyCount);
-                selectedMove = move;
-                break;
-            }
-
-            Piece capturedPiece = board.GetPiece(move.TargetSquare);
-            int capturedPieceValue = pieceValues[(int)capturedPiece.PieceType];
-            if (capturedPieceValue != 0) {
-                Console.WriteLine("test {0}", (int)capturedPiece.PieceType);
-            }
-
-            if (capturedPieceValue > highestValueCapture){
-                selectedMove = move;
-                highestValueCapture = capturedPieceValue;
-            }
+            return bestMove;
         }
 
-        if (selectedMove.MovePieceType == PieceType.King && board.PlyCount/2 <= 4){
-            selectedMove = legalMoves[rng.Next(legalMoves.Length)];
+        int Search(Board board, int depth, int color, int a, int b){
+
+            if (board.IsDraw()){
+                return 0;
+            }
+            
+            if(depth == 0 || board.GetLegalMoves().Length == 0){
+                return Evaluate(board, color);
+            }
+
+            if(color == 1){
+                int maxEval = -bignumber;
+                foreach(Move move in board.GetLegalMoves()){
+                    board.MakeMove(move);
+                    int evaluation = Search(board, depth - 1, -1, a, b);
+                    board.UndoMove(move);
+                    int oldM = maxEval;
+                    maxEval = Math.Max(maxEval, evaluation);
+                    if(maxEval != oldM && depth == 5) bestMove = move;
+                    
+                    a = Math.Max(a, evaluation);
+                    if (b <= a) break;
+
+                }
+                    return maxEval;
+            } else {
+                int minEval = bignumber;
+                foreach(Move move in board.GetLegalMoves()){
+                    board.MakeMove(move);
+                    int evaluation = Search(board, depth - 1, 1, a, b);
+                    board.UndoMove(move);
+                    int oldM = minEval;
+                    minEval = Math.Min(minEval, evaluation);
+                    if(minEval != oldM && depth == 5) bestMove = move;
+                    
+                    b = Math.Min(b, evaluation);
+                    if (b <= a) break;
+                    
+                }
+                    return minEval;
+            }
         }
+        int Evaluate(Board board, int color){
+			int sum = 0;
 
-        return selectedMove;
-    }
+			if (board.IsInCheckmate())
+				return board.IsWhiteToMove ? -bignumber : bignumber;
 
-    bool MoveIsCheckmateOrDraw(Board board, Move move){
-        board.MakeMove(move);
-        bool isMate = board.IsInCheckmate();
-        board.UndoMove(move);
-        return isMate;
-    }
+            // got this from .augs
+			for (int i = 0; ++i < 7;)
+				sum += (board.GetPieceList((PieceType)i, true).Count - board.GetPieceList((PieceType)i, false).Count) * pieceValues[i];
+			// EVALUATE
 
-    bool MoveIsDraw(Board board, Move move)
-    {
-        board.MakeMove(move);
-        bool isDraw = board.IsDraw();
-        board.UndoMove(move);
-        return isDraw;
+			return color * sum;
+        }
     }
 }
