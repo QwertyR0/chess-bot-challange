@@ -6,8 +6,9 @@ namespace ChessChallenge.Example {
         int startDepth = 5;
         int bignumber = 999999999;
         int[] pieceValues = { 0, 100, 300, 310, 500, 900, 10000 };
-        Move bestMove = Move.NullMove;
+        Move bestMove;
         public Move Think(Board board, Timer timer){
+            bestMove = board.GetLegalMoves()[0];
             int cl = -1;
 
             if(board.IsWhiteToMove) cl = 1;
@@ -69,7 +70,9 @@ namespace ChessChallenge.Example {
             // got this from .augs
 			for (int i = 0; ++i < 7;)
 				sum += (board.GetPieceList((PieceType)i, true).Count - board.GetPieceList((PieceType)i, false).Count) * pieceValues[i];
-			// EVALUATE
+
+            if (board.IsInCheck())
+				sum += board.IsWhiteToMove ? -800 : 800;
 
 			return color * sum;
         }
