@@ -1,15 +1,12 @@
+The game below is actually so good!
+
 [White "Human"]
 [Black "MyBot"]
-[Result "DrawByArbiter"]
-1. e4 e6 2. Nf3 c6 3. Nc3 Qa5 4. d4 Nf6 5. Bg5 Nxe4 
-[White "MyBot"]
-[Black "MyBot"]
 [Result "WhiteIsMated"]
-1. Na3 Na6 2. Rb1 Nb4 3. d3 c6 4. Kd2 Qa5 5. Ke3 Kd8 6. Ra1 Ke8 7. Rb1 Qc5+ 8. Kd2 Qxf2 9. Kc3 Nxa2+ 10. Kb3 Nxc1+ 11. Kc3 Qc5+ 12. Nc4 Na2+ 13. Kd2 Kd8 14. c3 Qg5+ 15. Kc2 Qb5 16. b3 g6 17. Kd2 Bh6+ 18. Ke1 Nxc3 19. Ra1 Nxd1 20. e3 Nxe3 21. Kd2 Nxc4+ 22. Kd1 Qe5 23. Rb1 Qe3 24. Nf3 Nd2 25. Kc2 Qf2 26. Kb2 Bg7+ 27. Ne5 Bxe5+ 28. d4 Nc4+ 29. Ka1 Qc2 30. Rc1 Qxc1+ 31. Ka2 Qc2+ 32. Ka1 Kc7 33. Rg1 Kb6 34. Rh1 Ka5 35. Rg1 Kb4 36. Rh1 Ka3 37. Rg1 Qc1# 
-[White "MyBot"]
-[Black "MyBot"]
-[Result "DrawByArbiter"]
-1. Na3 Na6 2. Rb1 Nb4 3. d3 c6 4. Kd2 Qa5 5. Ke3 Kd8 6. Ra1 Ke8 7. Rb1 Qc5+ 8. Kd2 Qxf2 9. Kc3 Nxa2+ 10. Kb3 Nxc1+ 11. Kc3 Qc5+ 12. Nc4 Na2+ 13. Kd2 
+1. e4 e6 2. Nf3 c6 3. Nc3 Qa5 4. d4 Nf6 5. Qd3 Nxe4 6. Qxe4 Rg8 7. Nd2 Qg5 8. Nf3 Qa5 9. Nd2 Qh5 10. g4 Qh4 11. Nf3 Qf6 12. g5 Qe7 13. Bf4 Qb4 14. O-O-O f5 15. Qd3 Be7 16. a3 Qa5 17. Nh4 Bxa3 18. g6 Bb4 19. gxh7 Qa1+ 20. Kd2 Qxd1+ 21. Kxd1 Rh8 22. Na2 Rxh7 23. Nxb4 Rxh4 24. Bg3 Rh5 25. Be2 Rh3 26. Bh5+ Rxh5 27. h4 Ke7 28. Qf3 Rh7 29. h5 Kf7 30. h6 Kg8 31. Qh5 Rxh6 32. Qe8+ Kh7 33. Qxc8 Rxh1+ 34. Ke2 f4 35. Qxb7 fxg3 36. Qxa8 g2 37. Qxb8 g1=Q 38. Qxa7 Qe1+ 39. Kd3 Qxb4 40. Qxd7 Rd1+ 41. Ke2 Rd2+ 42. Ke3 Rxc2 43. Qxe6 Qe1+ 44. Kd3 Qxe6 45. Kxc2 Qe1 46. d5 Qxf2+ 47. Kb1 Qf1+ 48. Kc2 Qf5+ 49. Kc3 Qf3+ 50. Kc2 Qe2+ 51. Kb3 cxd5 52. Ka2 Kg6 53. Kb1 Qd2 54. b3 Kf5 55. b4 Qe1+ 56. Kb2 Qxb4+ 57. Kc2 Ke4 58. Kc1 Kd3 59. Kd1 Qb1# 
+
+Other Games with EvilBot:
+
 [White "MyBot"]
 [Black "EvilBot"]
 [Result "WhiteIsMated"]
