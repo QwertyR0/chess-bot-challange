@@ -1,4 +1,4 @@
 # chess-bot-challange
 Chess bot for Sebastian Lague's competition
 
-It currently does very bad and it's like updated version of evil bot 😀
+So it no longer does bad but maybe good? it beats evilbot most of the time...
