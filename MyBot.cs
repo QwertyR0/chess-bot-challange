@@ -3,15 +3,17 @@ using System;
 
 namespace ChessChallenge.Example {
     public class MyBot : IChessBot {
-        int bignumber = Int32.MaxValue;
-        int[] pieceValues = { 0, 100, 300, 300, 500, 900, 10000 };
+        int startDepth = 5;
+        int bignumber = 999999999;
+        int[] pieceValues = { 0, 100, 300, 310, 500, 900, 10000 };
         Move bestMove = Move.NullMove;
         public Move Think(Board board, Timer timer){
             int cl = -1;
 
             if(board.IsWhiteToMove) cl = 1;
 
-            Search(board, 5, cl, -bignumber, bignumber);
+            Search(board, startDepth, cl, -bignumber, bignumber);
+            Console.WriteLine("{0}", bestMove);
 
             return bestMove;
         }
@@ -34,7 +36,7 @@ namespace ChessChallenge.Example {
                     board.UndoMove(move);
                     int oldM = maxEval;
                     maxEval = Math.Max(maxEval, evaluation);
-                    if(maxEval != oldM && depth == 5) bestMove = move;
+                    if(maxEval != oldM && depth == startDepth) bestMove = move;
                     
                     a = Math.Max(a, evaluation);
                     if (b <= a) break;
@@ -49,7 +51,7 @@ namespace ChessChallenge.Example {
                     board.UndoMove(move);
                     int oldM = minEval;
                     minEval = Math.Min(minEval, evaluation);
-                    if(minEval != oldM && depth == 5) bestMove = move;
+                    if(minEval != oldM && depth == startDepth) bestMove = move;
                     
                     b = Math.Min(b, evaluation);
                     if (b <= a) break;
