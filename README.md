@@ -1,4 +1,5 @@
 # chess-bot-challange
 Chess bot for Sebastian Lague's competition
 
-So it no longer does bad(without the experimental) but maybe good? it beats evilbot most of the time...
+So it no longer does bad(whitout the experimental) but maybe good? it beats evilbot most of the time...
+It currently doesn't eben have a PST, so don't expect good openings
